@@ -50,7 +50,7 @@ object Application extends Controller {
             val nerd = nerds.filter(nerd => nerd.get("email") == email).head
 
             (result ++ nerd).mapValues(v => v.as[String])
-          })
+          }).sortBy(nerd => nerd("name"))
 
           Ok(views.html.index(vacationingNerds))
         }
