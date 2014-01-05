@@ -1,5 +1,17 @@
-@main("Welcome to Play") {
+@(vacationingNerds: List[scala.collection.immutable.Map[String,String]])
 
-  <h1>boomer?</h1>
+@main("Vacation me") {
+
+  <h1>Nerds on Vacation</h1>
+
+  <ul>
+    @vacationingNerds.map { nerd =>
+
+    <li>@nerd("name")
+      <img src=@nerd("gravatarUrl") />
+    </li>
+
+    }
+  </ul>
 
 }

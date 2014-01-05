@@ -3,7 +3,7 @@ package lib
 object Stable {
   val baseUrl = "https://stable.bignerdranch.com"
 
-  val nerds = baseUrl + "/nerds.json"
+  val nerds = baseUrl + "/users.json"
   val results = baseUrl + "/results.json"
 
   val baseParams =
@@ -19,4 +19,13 @@ object Stable {
 
   val authRequestUrl = baseUrl + "/oauth/authorize" + authRequestParams
   val tokenRequestUrl = baseUrl + "/oauth/token" + tokenRequestParams
+}
+
+import java.util.Date
+import java.text.SimpleDateFormat
+
+object ResultsQuery {
+  val formatter = new SimpleDateFormat("MM-dd-yyy")
+  val today = formatter.format(new Date).replaceAll("-", "%2F")
+  val resultsUrl = Stable.results + "?result_filter_query%5Bstart_date%5D=" + today + "&result_filter_query%5Bend_date%5D=" + today + "&result_filter_query%5Btentative%5D=0&result_filter_query%5Bbooked%5D=0&result_filter_query%5Backnowledged%5D=0&result_filter_query%5Bin_progress%5D=0&result_filter_query%5Bcompleted%5D=0&result_filter_query%5Bcompleted%5D=1&result_filter_query%5Bbilled%5D=0&result_filter_query%5Bcompensated%5D=0&result_filter_query%5Bproject_id%5D=&commit=Filter"
 }
