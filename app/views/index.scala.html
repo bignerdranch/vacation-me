@@ -2,16 +2,27 @@
 
 @main("Vacation me") {
 
-  <h1>Nerds on Vacation</h1>
+  <header class="header column twelve">
+    <h1 class="logo">Nerds on Vacation</h1>
+  </header>
 
-  <ul>
-    @vacationingNerds.map { nerd =>
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th>Nerd</th>
+        <th>Vacationing until</th>
+      </tr>
+    </thead>
 
-    <li>@nerd("name")
-      <img src=@nerd("gravatarUrl") />
-    </li>
-
-    }
-  </ul>
-
+    <tbody>
+      @vacationingNerds.map { nerd =>
+      <tr>
+        <td class="right"><img src=@nerd("gravatarUrl") /></td>
+        <td class="middle">@nerd("name")</td>
+        <td class="middle">@nerd("endDate")</td>
+      </tr>
+      }
+    </tbody>
+  </table>
 }
