@@ -41,10 +41,6 @@ object Application extends Controller {
             }
           }
         } yield {
-          val vacations = results.filter(result =>
-            result.get("projectType") == "Vacation"
-          )
-
           val vacationingNerds = results.map(result => {
             val email = result.get("userEmail")
             val nerd = nerds.filter(nerd => nerd.get("email") == email).head
