@@ -12,7 +12,7 @@
         <tr>
           <th></th>
           <th>Nerd</th>
-          <th>Vacationing until</th>
+          <th>Out through</th>
         </tr>
       </thead>
 
@@ -20,7 +20,10 @@
         @vacationingNerds.map { nerd =>
         <tr>
           <td class="right"><img src=@nerd("gravatarUrl") /></td>
-          <td class="middle">@nerd("name")</td>
+          <td class="middle">
+            @nerd("name")
+            <p class="note">@nerd("notes")</p>
+          </td>
           <td class="middle">@nerd("endDate")</td>
         </tr>
         }
