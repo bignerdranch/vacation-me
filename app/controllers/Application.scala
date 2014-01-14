@@ -25,6 +25,7 @@ object Application extends Controller {
               Map("id" -> obj \ "id",
                 "startDate" -> obj  \ "start_date",
                 "endDate" -> obj  \ "end_date",
+                "notes" -> obj \ "notes",
                 "userEmail" -> obj  \ "_embedded" \ "user" \ "email",
                 "projectName" -> obj  \ "_embedded" \ "project" \ "name",
                 "projectType" -> obj  \ "_embedded" \ "project" \ "type")
@@ -45,7 +46,7 @@ object Application extends Controller {
             val email = result.get("userEmail")
             val nerd = nerds.filter(nerd => nerd.get("email") == email).head
 
-            (result ++ nerd).mapValues(v => v.as[String])
+            (result ++ nerd).mapValues(v => v.asOpt[String])
           }).sortBy(nerd => nerd("name"))
 
           Ok(views.html.index(vacationingNerds))
