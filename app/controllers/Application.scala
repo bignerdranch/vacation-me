@@ -9,6 +9,7 @@ import play.api.libs.json._
 
 import lib.Stable
 import lib.ResultsQuery
+import lib.StableData
 
 object Application extends Controller {
 
@@ -21,30 +22,19 @@ object Application extends Controller {
 
         for {
           results <- WS.url(resultsUrl).withHeaders("Authorization" -> authHeader).get().map { response =>
-            response.json.as[List[JsObject]].map { obj =>
-              Map("id" -> obj \ "id",
-                "startDate" -> obj  \ "start_date",
-                "endDate" -> obj  \ "end_date",
-                "notes" -> obj \ "notes",
-                "userEmail" -> obj  \ "_embedded" \ "user" \ "email",
-                "projectName" -> obj  \ "_embedded" \ "project" \ "name",
-                "projectType" -> obj  \ "_embedded" \ "project" \ "type")
-            }
+            response.json
           }
 
           nerds <- WS.url(nerdsUrl).withHeaders("Authorization" -> authHeader).get().map { response =>
-            response.json.as[List[JsObject]].map { obj =>
-              Map("id" -> obj \ "id",
-                "email" -> obj  \ "email",
-                "name" -> obj  \ "full_name",
-                "team_id" -> obj  \ "team_id",
-                "gravatarUrl" -> obj  \ "gravatar_url")
-            }
+            response.json
           }
         } yield {
-          val vacationingNerds = results.map(result => {
+          val resultsData = StableData.resultData(results)
+          val usersData = StableData.userData(nerds)
+
+          val vacationingNerds = resultsData.map(result => {
             val email = result.get("userEmail")
-            val nerd = nerds.filter(nerd => nerd.get("email") == email).head
+            val nerd = usersData.filter(nerd => nerd.get("email") == email).head
 
             (result ++ nerd).mapValues(v => v.asOpt[String])
           }).sortBy(nerd => nerd("name"))
