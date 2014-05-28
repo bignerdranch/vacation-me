@@ -14,7 +14,7 @@ import lib.StableData
 object Application extends Controller {
 
   def index = Action { implicit request =>
-    request.session.get("accessToken").map { token =>
+    flash.get("accessToken").map { token =>
       Async {
         val resultsUrl = ResultsQuery.resultsUrl + "&per_page=100"
         val nerdsUrl = Stable.nerds

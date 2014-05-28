@@ -22,7 +22,7 @@ object Auth extends Controller {
     val url = Stable.tokenRequestUrl + code
 
     WS.url(url).post("").map { response =>
-      Redirect(routes.Application.index).withSession(
+      Redirect(routes.Application.index).flashing(
         "accessToken" -> (response.json \ "access_token").as[String])
     }
   }
