@@ -29,6 +29,12 @@ I use this to fire up my play console.
 You can get the right OAuth credentials (to use above) here:
 [https://stable.bignerdranch.com/oauth/applications/11](https://stable.bignerdranch.com/oauth/applications/11).
 
+## Deploying
+
+```sh
+bin/deploy
+```
+
 ## What it does
 
 The objective of Vacation Me is simple: to let you know, at a glance,

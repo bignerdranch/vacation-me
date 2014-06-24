@@ -1,0 +1,4 @@
+#!/bin/sh
+
+git push heroku master
+heroku restart -a vacation-me
