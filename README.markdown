@@ -47,7 +47,7 @@ Once you have authenticated, I'm using your OAuth credentials to look
 at results in stable.  I look for all the vacation results for today,
 where that involves looking for all the uncompensated, unbilled,
 unacknowledged, unbooked, non-tentative results, then pulling on the
-ones that are of the "vacation" type.  I'm thinking there should be an
+ones booked against the "PTO" project.  I'm thinking there should be an
 easier way to do this, but I couldn't find one.  Then we merge those
 results with their owners, and show them up.  Simple and easy.
 

@@ -30,7 +30,7 @@ object Application extends Controller {
           }
         } yield {
           val resultsData = StableData.resultData(results)
-            .filter(result => result("projectName") == JsString("Vacation") )
+            .filter(result => result("projectName") == JsString("PTO") )
           val usersData = StableData.userData(nerds)
 
           val vacationingNerds = resultsData.map(result => {
